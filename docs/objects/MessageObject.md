@@ -56,7 +56,7 @@ The `content` of a text message may contain either a string (treated as a UTF-8 
       ascii: "I'm smiling :)",
       utf8: "I'm smiling 😊",
       markdown: "**I'm smiling 😊**",
-      markdown-whatsapp: "*I'm smiling 😊*"
+      markdown_whatsapp: "*I'm smiling 😊*"
       vendor: {
         "jp.naver.line": {
           text: "I'm smiling $",
@@ -80,7 +80,7 @@ The `content` of a text message may contain either a string (treated as a UTF-8 
 | `ascii` | An ASCII-compatible string | **Either `ascii` or `utf8` is required.** Provides an ASCII-compatible text message. |
 | `utf8` | A string | **Either `ascii` or `utf8` is required.** Provides an UTF-8 (default) text message. |
 | `markdown` | A markdown-encoded string | Provides an inline Markdown-encoded (generally [CommonMark](https://commonmark.org/) or [Github-Flavored Markdown](https://guides.github.com/features/mastering-markdown/)) text message to allow limited rich-text rendering (e.g. on Discord). |
-| `markdown-whatsapp` | A WhatsApp-based markdown-encoded string | Provides a text message encoded with a special markdown syntax, originally used for WhatsApp. See https://faq.whatsapp.com/general/chats/how-to-format-your-messages/ for details. |
+| `markdown_whatsapp` | A WhatsApp-based markdown-encoded string | Provides a text message encoded with a special markdown syntax, originally used for WhatsApp. See https://faq.whatsapp.com/general/chats/how-to-format-your-messages/ for details. |
 | `vendor` | A `VendorTextMessageContent` | Provides a custom text message format for use in specific apps. See **Vendors** for information. |
 
 ### Image Message

@@ -1,0 +1,3 @@
+interface MessageContent {
+  vendor?: object
+}
