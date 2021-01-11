@@ -1,10 +1,9 @@
-interface ServiceProvider {
+interface ServiceProvider extends Object {
   /* SETTERS */
   // Set the name of the bot
 
 
   /* GETTERS */
-
   // Retrieves the name of the service provider
   getProviderName(): string
 

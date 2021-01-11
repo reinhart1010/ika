@@ -1,3 +1,3 @@
-interface MessageContent {
-  vendor?: object
+interface MessageContent extends Object {
+  vendor?: {[index: string]:any}
 }

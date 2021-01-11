@@ -1,27 +1,28 @@
 class TextMessageObject implements MessageObject {
   type = "text";
-  content: TextMessageContent | Array<TextMessageContent>;
+  content: Array<TextMessageContent>;
 
   // The `content` of a text message may contain either a string (treated as a UTF-8 encoded text), a `TextMessageContent` object, or an array of string and/or `TextMessageContent`.
-  constructor(message: string | TextMessageContent | object | Array<string | TextMessageContent | object>){
+  constructor(message: undefined | string | object | TextMessageContent | {vendor?: {[index: string]: object | TextMessageContent}} | Array<string | TextMessageContent | {vendor?: {[index: string]: object | TextMessageContent}}>){
+    this.content = [];
     // Directly pass the TextMessageContent
-    if (message instanceof Array){
-      this.content = [];
+    if (typeof message === "undefined") return;
+    else if (message instanceof Array){
       let i: number;
       for (i = 0; i < message.length; i++){
-        let list: string | object | TextMessageContent = message[i]
-        if (list instanceof TextMessageContent) {
-          this.content[i] = message[i] as TextMessageContent;
+        let list: string | {vendor?: {[index: string]: object | TextMessageContent}} | TextMessageContent = message[i]
+        if (typeof list === "object") {
+          this.content[i] = list as TextMessageContent;
         } else {
-          this.content[i] = new TextMessageContent(message[i] as string);
+          this.content[i] = new TextMessageContent(list as string);
         }
         
       }
     } else if (typeof message === "string") {
-      this.content = new TextMessageContent(message);
-    } else {
+      this.content[0] = new TextMessageContent(message);
+    } else if (typeof message === "object") {
       // Object
-      this.content = message as TextMessageContent;
+      this.content[0] = message as TextMessageContent;
     }
   }
 }
