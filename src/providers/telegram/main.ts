@@ -1,6 +1,8 @@
 class TelegramServiceProvider implements ServiceProvider {
-  constructor(options: object){
+  token: string = ""
 
+  constructor(options: {token: string}){
+    this.token = options.token
   }
 
   getProviderName(){
@@ -36,10 +38,29 @@ class TelegramServiceProvider implements ServiceProvider {
       if ("markdown_whatsapp" in message.content[i]){
         message.content[i] = {markdown_whatsapp: message.content[i].markdown_whatsapp} as TextMessageContent
       }
+      // Alternatively, try to convert a common Markdown-formatted text message
+      else if ("markdown" in message.content[i]){
+        message.content[i] = {markdown: message.content[i].convertMarkdownToWhatsapp(message.content[i].markdown!)} as TextMessageContent
+      }
+      // Alternatively, use raw HTML
+      else if ("html" in message.content[i]){
+        message.content[i] = {html: message.content[i].html} as TextMessageContent
+      }
+      // Alternatively, use UTF-8
+      else if ("utf8" in message.content[i]){
+        message.content[i] = {utf8: message.content[i].utf8} as TextMessageContent
+      }
+      // Alternatively, directly convert ASCII to UTF-8
+      else if ("ascii" in message.content[i]){
+        message.content[i] = {utf8: message.content[i].ascii} as TextMessageContent
+      }
+      else {
+        message.content[i] = {} as TextMessageContent
+      }
     }
-    
     return message;
   }
+  
 }
 
 module.exports = TelegramServiceProvider

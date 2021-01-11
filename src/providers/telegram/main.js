@@ -30,6 +30,25 @@ var TelegramServiceProvider = /** @class */ (function () {
             if ("markdown_whatsapp" in message.content[i]) {
                 message.content[i] = { markdown_whatsapp: message.content[i].markdown_whatsapp };
             }
+            // Alternatively, try to convert a common Markdown-formatted text message
+            else if ("markdown" in message.content[i]) {
+                message.content[i] = { markdown: message.content[i].convertMarkdownToWhatsapp(message.content[i].markdown) };
+            }
+            // Alternatively, use raw HTML
+            else if ("html" in message.content[i]) {
+                message.content[i] = { html: message.content[i].html };
+            }
+            // Alternatively, use UTF-8
+            else if ("utf8" in message.content[i]) {
+                message.content[i] = { utf8: message.content[i].utf8 };
+            }
+            // Alternatively, directly convert ASCII to UTF-8
+            else if ("ascii" in message.content[i]) {
+                message.content[i] = { utf8: message.content[i].ascii };
+            }
+            else {
+                message.content[i] = {};
+            }
         }
         return message;
     };

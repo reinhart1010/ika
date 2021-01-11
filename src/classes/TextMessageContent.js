@@ -37,10 +37,22 @@ var TextMessageContent = /** @class */ (function () {
         // Replace **...** (bold) to *...*
         markdown.replace(/\*\*(.+?)\*\*/, "*$1*");
         // Replace ~~...~~ (strikethrough) to ~...~
-        markdown.replace(/~~(.+?)\~~/, "~$1~");
+        markdown.replace(/~~(.+?)~~/, "~$1~");
         // Replace `...` (code block) to ```...```
         markdown.replace(/(?<!``)`([^`\n]+)`(?!``)/, "```$1```");
         markdown = this.convertCheckboxGFMToUnicode(markdown);
+        return markdown;
+    };
+    /**
+     * Generates common Markdown-formatted strings from ones from WhatsApp and Telegram
+     *
+     * @param markdown WhatsApp-based markdown string to be converted
+     */
+    TextMessageContent.prototype.convertWhatsappToMarkdown = function (markdown) {
+        // Replace *...* (bold) to **...** to avoid confusion with italics
+        markdown.replace(/\*(.+?)\*/, "**$1**");
+        // Replace ~...~ (strikethrough) to ~~...~~
+        markdown.replace(/~(.+?)~/, "~~$1~~");
         return markdown;
     };
     /**

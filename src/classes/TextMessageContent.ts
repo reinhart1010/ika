@@ -44,17 +44,32 @@ class TextMessageContent implements MessageContent {
     // WhatsApp-flavored Markdown only uses _..._ for italic text, instead of *...*global.fetch = require('node-fetch');
     // Convert them to _..._ first to avoid with *...* (for bold text)
     markdown.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/, "_$1_")
-
+    
     // Replace **...** (bold) to *...*
     markdown.replace(/\*\*(.+?)\*\*/, "*$1*")
     
     // Replace ~~...~~ (strikethrough) to ~...~
-    markdown.replace(/~~(.+?)\~~/, "~$1~")
+    markdown.replace(/~~(.+?)~~/, "~$1~")
 
     // Replace `...` (code block) to ```...```
     markdown.replace(/(?<!``)`([^`\n]+)`(?!``)/, "```$1```")
 
     markdown = this.convertCheckboxGFMToUnicode(markdown)
+    return markdown
+  }
+
+  /**
+   * Generates common Markdown-formatted strings from ones from WhatsApp and Telegram
+   * 
+   * @param markdown WhatsApp-based markdown string to be converted
+   */
+  convertWhatsappToMarkdown(markdown: string){
+    // Replace *...* (bold) to **...** to avoid confusion with italics
+    markdown.replace(/\*(.+?)\*/, "**$1**")
+
+    // Replace ~...~ (strikethrough) to ~~...~~
+    markdown.replace(/~(.+?)~/, "~~$1~~")
+
     return markdown
   }
 
