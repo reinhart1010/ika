@@ -1,16 +1,30 @@
 "use strict";
 var TelegramServiceProvider = /** @class */ (function () {
     function TelegramServiceProvider(options) {
+        this.token = "";
+        this.token = options.token;
     }
-    TelegramServiceProvider.prototype.getProviderName = function () {
+    TelegramServiceProvider.prototype.getServiceName = function () {
         return "Telegram";
     };
-    TelegramServiceProvider.prototype.getProviderRDN = function () {
+    TelegramServiceProvider.prototype.getServiceRDN = function () {
         return "org.telegram.messenger";
+    };
+    TelegramServiceProvider.prototype.getProviderName = function () {
+        return "Telegraf";
+    };
+    TelegramServiceProvider.prototype.getProviderRDN = function () {
+        return "org.js.telegraf";
+    };
+    TelegramServiceProvider.prototype.getSupportedIncomingMessageTypes = function () {
+        return {
+            sticker: ["webp", "img", "vendor.animated"],
+            text: ["utf8"],
+        };
     };
     TelegramServiceProvider.prototype.getSupportedOutgoingMessageTypes = function () {
         return {
-            text: true
+            text: ["markdown_whatsapp", "markdown", "utf8", "ascii"],
         };
     };
     TelegramServiceProvider.prototype.getPreferredMessageType = function (message) {

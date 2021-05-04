@@ -6,6 +6,14 @@ class ChatAjaServiceProvider implements ServiceProvider {
     this.options = options
   }
 
+  getServiceName(){
+    return "ChatAja"
+  }
+
+  getServiceRDN(){
+    return "id.chataja"
+  }
+
   getProviderName(){
     return "ChatAja"
   }
@@ -14,9 +22,15 @@ class ChatAjaServiceProvider implements ServiceProvider {
     return "id.chataja"
   }
 
+  getSupportedIncomingMessageTypes(){
+    return {
+      text: ["utf8"]
+    }
+  }
+
   getSupportedOutgoingMessageTypes(){
     return {
-      text: true
+      text: ["utf8", "ascii"]
     }
   }
 

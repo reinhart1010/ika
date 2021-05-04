@@ -1,9 +1,9 @@
 "use strict";
-var TextMessageObject = /** @class */ (function () {
+var FileMessageObject = /** @class */ (function () {
     // options: TextMessageOptions;
-    // The `content` of a text message may contain either a string (treated as a UTF-8 encoded text), a `TextMessageContent` object, or an array of string and/or `TextMessageContent`.
-    function TextMessageObject(message) {
-        this.type = "text";
+    // The `content` of a file may contain a `FileMessageContent` object, or an array of `FileMessageContent`.
+    function FileMessageObject(message) {
+        this.type = "file";
         this.content = [];
         // Directly pass the TextMessageContent
         if (typeof message === "undefined")
@@ -17,13 +17,13 @@ var TextMessageObject = /** @class */ (function () {
                     this.content[i] = list;
                 }
                 else {
-                    this.content[i] = new TextMessageContent(list);
+                    this.content[i] = new FileMessageContent(list);
                 }
             }
             // If the content is a String, create a new TextMessageContent containing that string
         }
         else if (typeof message === "string") {
-            this.content[0] = new TextMessageContent(message);
+            this.content[0] = new FileMessageContent(message);
             // If the content is a Object, use that as a TextMessageContent
         }
         else if (typeof message === "object") {
@@ -31,5 +31,5 @@ var TextMessageObject = /** @class */ (function () {
             this.content[0] = message;
         }
     }
-    return TextMessageObject;
+    return FileMessageObject;
 }());

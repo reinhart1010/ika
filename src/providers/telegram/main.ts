@@ -5,17 +5,33 @@ class TelegramServiceProvider implements ServiceProvider {
     this.token = options.token
   }
 
-  getProviderName(){
+  getServiceName(){
     return "Telegram"
+  }
+
+  getServiceRDN(){
+    return "org.telegram.messenger"
+  }
+
+  getProviderName(){
+    return "Telegraf"
   }
   
   getProviderRDN(){
-    return "org.telegram.messenger"
+    return "org.js.telegraf"
+  }
+
+  getSupportedIncomingMessageTypes(){
+    return {
+      sticker: ["webp", "img", "vendor.animated"],
+      text: ["utf8"],
+    }
   }
 
   getSupportedOutgoingMessageTypes(){
     return {
-      text: true
+      text: ["markdown_whatsapp", "markdown", "utf8", "ascii"],
+      
     }
   }
 

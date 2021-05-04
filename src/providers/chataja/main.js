@@ -4,15 +4,26 @@ var ChatAjaServiceProvider = /** @class */ (function () {
         this.apiUrl = 'https://api.chataja.co.id/api/v1/chat/conversations/';
         this.options = options;
     }
+    ChatAjaServiceProvider.prototype.getServiceName = function () {
+        return "ChatAja";
+    };
+    ChatAjaServiceProvider.prototype.getServiceRDN = function () {
+        return "id.chataja";
+    };
     ChatAjaServiceProvider.prototype.getProviderName = function () {
         return "ChatAja";
     };
     ChatAjaServiceProvider.prototype.getProviderRDN = function () {
         return "id.chataja";
     };
+    ChatAjaServiceProvider.prototype.getSupportedIncomingMessageTypes = function () {
+        return {
+            text: ["utf8"]
+        };
+    };
     ChatAjaServiceProvider.prototype.getSupportedOutgoingMessageTypes = function () {
         return {
-            text: true
+            text: ["utf8", "ascii"]
         };
     };
     ChatAjaServiceProvider.prototype.getPreferredMessageType = function (message) {

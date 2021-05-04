@@ -4,11 +4,20 @@ interface ServiceProvider extends Object {
 
 
   /* GETTERS */
-  // Retrieves the name of the service provider
+  // Retrieves the name of the service
+  getServiceName(): string
+
+  // Retrieves the RDN (Reverse Domain Notation) name of the service
+  getServiceRDN(): string
+
+  // Retrieves the name of the service provider, if the ServiceProvider relies on another library
   getProviderName(): string
 
-  // Retrieves the RDN (Reverse Domain Notation) name of the service provider
+  // Retrieves the RDN (Reverse Domain Notation) name of the service provider, if the ServiceProvider relies on another library
   getProviderRDN(): string
+
+  // Retrieves the supported received message types
+  getSupportedIncomingMessageTypes(): object
 
   // Retrieves the supported message types for sending
   getSupportedOutgoingMessageTypes(): object
